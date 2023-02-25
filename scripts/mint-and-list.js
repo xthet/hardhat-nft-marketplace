@@ -1,24 +1,24 @@
 const { network, ethers } = require("hardhat")
 const { moveBlocks } = require("../utils/move-blocks")
 
-const PRICE = ethers.utils.parseEther("0.1")
+const PRICE = ethers.utils.parseEther("0.05")
 
 async function mintAndList()
 {
   const NFTMarketplace = await ethers.getContract("NFTMarketplace")
-  const basicNFT = await ethers.getContract("BasicNFT")
+  const fishyTroopersNFT = await ethers.getContract("FishyTroopersNFT")
 
   console.log("Minting...")
-  const mintTx = await basicNFT.mintNft()
+  const mintTx = await fishyTroopersNFT.mintNft()
   const mintTxR = await mintTx.wait(1)
   const tokenId = mintTxR.events[0].args.tokenId
 
   console.log("Approving NFT...")
-  const approvalTx = await basicNFT.approve(NFTMarketplace.address, tokenId)
+  const approvalTx = await fishyTroopersNFT.approve(NFTMarketplace.address, tokenId)
   await approvalTx.wait(1)
 
   console.log("Listing NFT...")
-  const listTx = await NFTMarketplace.listItem(basicNFT.address, tokenId, PRICE)
+  const listTx = await NFTMarketplace.listItem(fishyTroopersNFT.address, tokenId, PRICE)
   await listTx.wait(1)
   console.log("Listed")
 

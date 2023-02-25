@@ -6,13 +6,13 @@ const PRICE = ethers.utils.parseEther("0.1")
 async function mint()
 {
   const NFTMarketplace = await ethers.getContract("NFTMarketplace")
-  const basicNFT = await ethers.getContract("BasicNFT")
+  const fishyTroopersNFT = await ethers.getContract("FishyTroopersNFT")
 
   console.log("Minting...")
-  const mintTx = await basicNFT.mintNft()
+  const mintTx = await fishyTroopersNFT.mintNft()
   const mintTxR = await mintTx.wait(1)
   const tokenId = mintTxR.events[0].args.tokenId
-  console.log(`NFT Address: ${basicNFT.address}`)
+  console.log(`NFT Address: ${fishyTroopersNFT.address}`)
   console.log(`Token ID: ${tokenId}`)
   console.log(`Approve for: ${NFTMarketplace.address}`)
 

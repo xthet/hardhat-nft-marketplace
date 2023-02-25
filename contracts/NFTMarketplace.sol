@@ -3,6 +3,7 @@ pragma solidity ^0.8.8;
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 // ^IERC721 is the ERC721 Interface it can initiate an ERC721 nft contract with
 // the nft contract address
 
@@ -22,6 +23,13 @@ contract NFTMarketplace is ReentrancyGuard
   {
     uint256 price;
     address seller;
+  }
+
+  struct Collection
+  {
+    string name;
+    string symbol;
+    address nftAddress;
   }
 
   // EVENTS
@@ -48,6 +56,12 @@ contract NFTMarketplace is ReentrancyGuard
     uint256 indexed tokenId_
   );
   
+  event CollectionFound
+  (
+    string name_,
+    string symbol_,
+    address indexed nftAddress_
+  );
   // VARIABLES
   // nft contract address -> nft tokenId -> listing
   mapping(address => mapping(uint256 => Listing)) private s_listings; 
@@ -55,7 +69,12 @@ contract NFTMarketplace is ReentrancyGuard
   // seller address(i.e. merchant) -> amount earned
   mapping(address => uint256) private s_proceeds;
   // ^how much a merchant has earned
+  mapping(address => Collection) private s_collections;
+  // mapping(Collection => uint256) private s_listings;
 
+  string private s_name;
+  string private s_symbol;
+  
   // MODIFIERS
   modifier notListed(address nftAddress_, uint256 tokenId_, address owner_) 
   {  // modifier checking to see if nft hasn't been listed already
@@ -88,7 +107,7 @@ contract NFTMarketplace is ReentrancyGuard
      different erc20 token units
    */
   function listItem(address nftAddress_, uint256 tokenId_, uint256 price_) external
-  notListed(nftAddress_, tokenId_, msg.sender)  // notListed modifier
+  notListed(nftAddress_, tokenId_, msg.sender)  /** notListed modifier */  
   isOwner(nftAddress_, tokenId_, msg.sender)
   {  // nftAddress_ is the nft contract address
     if(price_ <= 0){revert NFTMarketplace__PriceMustBeAboveZero();}
@@ -103,7 +122,17 @@ contract NFTMarketplace is ReentrancyGuard
       revert NFTMarketplace__NotApprovedForMarketPlace();
     }
     s_listings[nftAddress_][tokenId_] = Listing(price_, msg.sender);
+    newCollection(nftAddress_);
     emit ItemListed(msg.sender, nftAddress_, tokenId_, price_);
+  }
+
+  function newCollection(address nftAddress_) public 
+  {
+    ERC721 nftContract = ERC721(nftAddress_); 
+    s_name = nftContract.name();
+    s_symbol = nftContract.symbol();
+    s_collections[nftAddress_] = Collection(s_name, s_symbol, nftAddress_);
+    emit CollectionFound(s_name, s_symbol, nftAddress_);
   }
 
   function buyItem(address nftAddress_, uint256 tokenId_) external payable 
@@ -163,5 +192,10 @@ contract NFTMarketplace is ReentrancyGuard
   function getProceeds(address seller_) external view returns(uint256)
   {
     return s_proceeds[seller_];
+  }
+
+  function getCollection(address nftAddress_) external view returns(Collection memory)
+  {
+    return s_collections[nftAddress_];
   }
 }

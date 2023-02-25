@@ -1,7 +1,7 @@
 const { network, ethers } = require("hardhat")
 const { moveBlocks, sleep } = require("../utils/move-blocks")
 
-const TOKEN_ID = 0
+const TOKEN_ID = 8
 
 async function remove()
 {

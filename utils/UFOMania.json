@@ -1,0 +1,11 @@
+{
+  "name": "UFO",
+  "description": "A glowing blue UFO",
+  "image": "https://ipfs.io/ipfs/QmYXnK5Qwz8kGDtuHhFtGRebdpnAQinQTLbo8BMsu7tQH7?filename=UFO.jpg",
+  "attributes": [
+    {
+      "trait_type": "stealth",
+      "value": 100
+    }
+  ]
+}

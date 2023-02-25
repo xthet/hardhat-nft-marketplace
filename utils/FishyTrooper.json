@@ -1,0 +1,11 @@
+{
+  "name": "Fishy Trooper",
+  "description": "A mean red fishy trooper",
+  "image": "https://ipfs.io/ipfs/QmUN6DduXVah6zhgmab9sxNbUFZUDRhv5fkJyKfGQLMVdD?filename=Fishy_Trooper.jpg",
+  "attributes": [
+    {
+      "trait_type": "angry",
+      "value": 100
+    }
+  ]
+}

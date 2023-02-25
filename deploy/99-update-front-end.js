@@ -1,8 +1,8 @@
 const { ethers, network } = require("hardhat")
 const fs = require("fs")
 
-const frontEndContractsFile = "../nextjs-nft-marketplace/constants/networkMapping.json" // file location
-const frontEndABILocation = "../nextjs-nft-marketplace/constants/" // folder location
+const frontEndContractsFile = "../apio-project/constants/networkMapping.json" // file location
+const frontEndABILocation = "../apio-project/constants/" // folder location
 
 module.exports = async () => 
 {
