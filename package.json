@@ -24,5 +24,8 @@
   "name": "hardhat-nft",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@fleekhq/fleek-storage-js": "^1.0.24"
+  }
 }

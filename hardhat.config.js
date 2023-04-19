@@ -22,18 +22,18 @@ module.exports = {
     localhost: {
       chainId: 31337,
     },
-    rinkeby:{
-      chainId: 4,
-      blockConfirmations: 7,
-      url: process.env.RINKEBY_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY],
-      timeout: 1000000
-    },
     goerli:{
       chainId: 5,
       blockConfirmations: 6,
       url: process.env.GOERLI_RPC_URL,
       accounts: [process.env.PRIVATE_KEY],
+      timeout: 1000000
+    },
+    sepolia:{
+      chainId: 11155111,
+      blockConfirmations: 3,
+      url: process.env.SEPOLIA_RPC_URL,
+      accounts: [process.env.FORMIC_PRIVATE_KEY],
       timeout: 1000000
     }
   },

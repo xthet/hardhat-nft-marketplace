@@ -3,22 +3,22 @@ const { moveBlocks } = require("../utils/move-blocks")
 
 const PRICE = ethers.utils.parseEther("0.05")
 
-async function mintAndList()
+async function mintAndList(NFTName)
 {
   const NFTMarketplace = await ethers.getContract("NFTMarketplace")
-  const fishyTroopersNFT = await ethers.getContract("FishyTroopersNFT")
+  const NFT = await ethers.getContract(NFTName)
 
   console.log("Minting...")
-  const mintTx = await fishyTroopersNFT.mintNft()
+  const mintTx = await NFT.mintNft()
   const mintTxR = await mintTx.wait(1)
   const tokenId = mintTxR.events[0].args.tokenId
 
   console.log("Approving NFT...")
-  const approvalTx = await fishyTroopersNFT.approve(NFTMarketplace.address, tokenId)
+  const approvalTx = await NFT.approve(NFTMarketplace.address, tokenId)
   await approvalTx.wait(1)
 
   console.log("Listing NFT...")
-  const listTx = await NFTMarketplace.listItem(fishyTroopersNFT.address, tokenId, PRICE)
+  const listTx = await NFTMarketplace.listItem(NFT.address, tokenId, PRICE)
   await listTx.wait(1)
   console.log("Listed")
 
@@ -28,7 +28,7 @@ async function mintAndList()
   }
 }
 
-mintAndList()
+mintAndList("BiohazardNFT")
   .then(()=>{process.exit(0)})
   .catch((e)=>
   {

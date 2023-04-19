@@ -1,8 +1,8 @@
 const { ethers, network } = require("hardhat")
 const fs = require("fs")
 
-const frontEndContractsFile = "../apio-project/constants/networkMapping.json" // file location
-const frontEndABILocation = "../apio-project/constants/" // folder location
+const frontEndContractsFile = "../nx-apio-project/constants/networkMapping.json" // file location
+// const frontEndABILocation = "../nx-apio-project/constants/" // folder location
 
 module.exports = async () => 
 {
@@ -10,7 +10,7 @@ module.exports = async () =>
   {
     console.log("Updating Front End...")
     await updatingContractAddresses()
-    await updateABI()
+    // await updateABI()
   }
 }
 
@@ -33,15 +33,15 @@ async function updatingContractAddresses()
   fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses)) // writing the object to the file
 }
 
-async function updateABI()
-{
-  const NFTMarketplace = await ethers.getContract("NFTMarketplace")
-  const basicNFT = await ethers.getContract("BasicNFT")
+// async function updateABI()
+// {
+//   const NFTMarketplace = await ethers.getContract("NFTMarketplace")
+//   const basicNFT = await ethers.getContract("BasicNFT")
 
-  fs.writeFileSync(`${frontEndABILocation}NFTMarketplace.json`, 
-    NFTMarketplace.interface.format(ethers.utils.FormatTypes.json)) // the contract abi
-  fs.writeFileSync(`${frontEndABILocation}basicNFT.json`, 
-    basicNFT.interface.format(ethers.utils.FormatTypes.json))
-}
+//   fs.writeFileSync(`${frontEndABILocation}NFTMarketplace.json`, 
+//     NFTMarketplace.interface.format(ethers.utils.FormatTypes.json)) // the contract abi
+//   fs.writeFileSync(`${frontEndABILocation}basicNFT.json`, 
+//     basicNFT.interface.format(ethers.utils.FormatTypes.json))
+// }
 
 module.exports.tags = ["all", "frontend"]
