@@ -28,7 +28,7 @@ async function mintAndList(NFTName)
   }
 }
 
-mintAndList("BiohazardNFT")
+mintAndList("MockingjayNFT")
   .then(()=>{process.exit(0)})
   .catch((e)=>
   {

@@ -1224,6 +1224,50 @@
       "artifacts": [
         "BiohazardNFT"
       ]
+    },
+    "C:\\Users\\cloo\\Documents\\Web3 Development\\apio-project\\hh-apio-project\\contracts\\mocks\\MockingjayNFT.sol": {
+      "lastModificationDate": 1681964361758,
+      "contentHash": "d22f5ebcaeb946bad8b0005d09ff86c9",
+      "sourceName": "contracts/mocks/MockingjayNFT.sol",
+      "solcConfig": {
+        "version": "0.8.8",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata",
+                "devdoc",
+                "userdoc",
+                "storageLayout",
+                "evm.gasEstimates"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          },
+          "metadata": {
+            "useLiteralContent": true
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.8"
+      ],
+      "artifacts": [
+        "MockingjayNFT"
+      ]
     }
   }
 }
